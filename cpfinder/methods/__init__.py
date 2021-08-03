@@ -5,6 +5,7 @@ import roerich
 from . import online_changepoint_detection as oncd
 from . import online_rulsif as orul
 from cpfinder.feature_engineering import _get_cps_from_R
+from cpfinder.vis import plot_matplotlib
 
 
 class bocpd:
@@ -31,7 +32,7 @@ class bocpd:
             self.varx = args["varx"]
             self.ii = args["ii"]
 
-    def fit(self, data, interval, animationFlag):
+    def fit(self, data, interval, animationFlag, plotFlag, annots=[]):
 
         # Create model
         model = oncd.GaussianUnknownMean(self.mean0, self.var0, self.varx)
@@ -41,13 +42,16 @@ class bocpd:
             animation = oncd.online_changepoint_detection_animation(
                 data, model, self.hazard, interval, self.ii
             )
-            plt.show()
+            if plotFlag:
+                plt.show()
             return animation
         else:
             R, pmean, pvar = oncd.online_changepoint_detection(
                 data, model, self.hazard, self.ii
             )
             cps = _get_cps_from_R(R, self.ii)
+            if plotFlag:
+                plot_matplotlib(data, np.arange(0, len(data)), R, pmean, pvar, annots)
             return cps
 
 
@@ -62,8 +66,8 @@ class rulsif:
 
     """
 
-    def __init__(self, *args):
-        if args[0] == "auto":
+    def __init__(self, args):
+        if args["auto"]:
             self.model = roerich.OnlineNNRuLSIF(
                 net="default",
                 scaler="default",
@@ -81,7 +85,7 @@ class rulsif:
         else:
             self.model = roerich.OnlineNNRuLSIF(*args)
 
-    def fit(self, data, interval, plot=False):
+    def fit(self, data, interval, animationFlag, plotFlag):
         T = np.arange(len(data))
 
         # Create
@@ -91,16 +95,16 @@ class rulsif:
         except ValueError or TypeError:
             peaks = []
 
-        # fig = plt.figure(figsize=(12, 20))
-        # ani = FuncAnimation(
-        #     fig,
-        #     orul.animate_rulsif,
-        #     np.arange(500, len(data), 500),
-        #     fargs=(data, [], self.model),
-        # )
-        # plt.show()
+        # if animationFlag:
+        #     fig = plt.figure(figsize=(12, 20))
+        #     ani = FuncAnimation(
+        #         fig,
+        #         orul.animate_rulsif,
+        #         np.arange(500, len(data), 500),
+        #         fargs=(data, [], self.model),
+        #     )
 
-        if plot == True:
+        if plotFlag == True:
             data = data.reshape(-1, 1)
             roerich.display(data, T, [], score, T, peaks=peaks)
             plt.show()

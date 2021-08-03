@@ -1,12 +1,10 @@
 from matplotlib.animation import FuncAnimation
 import matplotlib.pyplot as plt
-from matplotlib.colors import LogNorm
 import numpy as np
 from scipy.stats import norm
 from scipy.special import logsumexp
 from tqdm import tqdm
-from cpfinder.vis import plot_matplotlib
-from cpfinder.feature_engineering import _get_cps_from_R
+from cpfinder.vis import plot_matplotlib_animation
 
 
 # -----------------------------------------------------------------------------
@@ -33,11 +31,33 @@ def online_changepoint_detection_animation(data, model, hazard, interval=100, ii
         fig,
         _animate_bocpd,
         np.arange(1, len(data), interval),
-        fargs=(axes, data, model, hazard, interval, ii),
+        fargs=(fig, axes, data, model, hazard, interval, ii),
         interval=1,
         repeat=False,
     )
     return ani
+
+
+def _animate_bocpd(i, fig, axes, data, model, hazard, interval=100, ii=1, annots=[]):
+    if i == 1:
+        d = data[:i]
+        reg = 0
+    else:
+        # d = data[i - interval : i]
+        d = data[:i]
+        # reg = i - interval
+
+    T, log_R, pmean, pvar, log_message, log_H, log_1mH = _create_env(data, hazard, d)
+
+    for t in tqdm(range(1, T + 1)):
+        R, log_message = _calc(
+            model, d, log_R, pmean, pvar, log_message, log_H, log_1mH, t
+        )
+
+    # cps = _get_cps_from_R(R, insensivity_index=ii)
+    plot_matplotlib_animation(
+        d, fig, axes, np.arange(0, len(d)), R, pmean, pvar, annots
+    )
 
 
 def online_changepoint_detection(
@@ -64,26 +84,6 @@ def online_changepoint_detection(
             model, data, log_R, pmean, pvar, log_message, log_H, log_1mH, t
         )
     return R, pmean, pvar
-
-
-def _animate_bocpd(i, axes, data, model, hazard, interval=100, ii=1):
-    if i == 1:
-        d = data[:i]
-        reg = 0
-    else:
-        # d = data[i - interval : i]
-        d = data[:i]
-        # reg = i - interval
-
-    T, log_R, pmean, pvar, log_message, log_H, log_1mH = _create_env(data, hazard, d)
-
-    for t in tqdm(range(1, T + 1)):
-        R, log_message = _calc(
-            model, d, log_R, pmean, pvar, log_message, log_H, log_1mH, t
-        )
-
-    cps = _get_cps_from_R(R, insensivity_index=ii)
-    plot_matplotlib(axes, d, R, pmean, pvar, cps)
 
 
 def _calc(model, d, log_R, pmean, pvar, log_message, log_H, log_1mH, t):

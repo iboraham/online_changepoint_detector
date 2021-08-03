@@ -3,6 +3,7 @@ from .utils import str_to_func
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib import animation
 
 
 class cpfinder:
@@ -17,6 +18,10 @@ class cpfinder:
         self.methodString = method
         self.data = data
         self.annotations = annotations
+
+    def saveAnimationVideo(self, fname):
+        writergif = animation.PillowWriter(fps=1)
+        self.animationVideo.save(fname, writer=writergif)
 
     def fit(
         self,
@@ -51,14 +56,12 @@ class cpfinder:
         """
 
         # Given method to function
-        self.method = str_to_func(self.methodString)
+        method = str_to_func(self.methodString)
 
-        self.detector = self.method(model_parameters)
-        if animationFlag:
-            self.animationVideo, self.changepoints = self.detector.fit(
-                self.data, interval, animationFlag
-            )
-            if plotFlag:
-                plt.show()
-        else:
-            self.changepoints = self.detector.fit(self.data, interval, animationFlag)
+        detector = method(model_parameters)
+
+        results = detector.fit(self.data, interval, animationFlag, plotFlag)
+        if plotFlag:
+            plt.show()
+        self.animationVideo = results if animationFlag else None
+        self.changepoints = results if not animationFlag else None

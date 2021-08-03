@@ -1,12 +1,15 @@
 from matplotlib import pyplot as plt
-from .plot_mtp import plot_posterior
-import plotly.express as px
+from .plot_mtp import plot_posterior, plot_posterior_animation
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
 
 def plot_matplotlib(*args):
     plot_posterior(*args)
+
+
+def plot_matplotlib_animation(*args):
+    plot_posterior_animation(*args)
 
 
 def plot_result(cpd, cps_p, cps_pf, cps_e):
