@@ -8,8 +8,8 @@
   <a href="https://raw.githubusercontent.com/iboraham/online_changepoint_detector/master/LICENSE" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
   </a>
-  <a href="https://lgtm.com/projects/g/iboraham/changepoint_detector/alerts/"><img alt="Total alerts" src="https://img.shields.io/lgtm/alerts/g/iboraham/changepoint_detector.svg?logo=lgtm&logoWidth=18"/></a>
-  <a href="https://lgtm.com/projects/g/iboraham/changepoint_detector/context:python"><img alt="Language grade: Python" src="https://img.shields.io/lgtm/grade/python/g/iboraham/changepoint_detector.svg?logo=lgtm&logoWidth=18"/></a>
+  <a href="https://lgtm.com/projects/g/iboraham/online_changepoint_detector/alerts/"><img alt="Total alerts" src="https://img.shields.io/lgtm/alerts/g/iboraham/online_changepoint_detector.svg?logo=lgtm&logoWidth=18"/></a>
+  <a href="https://lgtm.com/projects/g/iboraham/online_changepoint_detector/context:python"><img alt="Language grade: Python" src="https://img.shields.io/lgtm/grade/python/g/iboraham/online_changepoint_detector.svg?logo=lgtm&logoWidth=18"/></a>
   <a href="https://twitter.com/iboraham" target="_blank">
     <img alt="Twitter: iboraham" src="https://img.shields.io/twitter/follow/iboraham.svg?style=social" />
   </a>
