@@ -5,7 +5,7 @@ import numpy as np
 from scipy.stats import norm
 from scipy.special import logsumexp
 from tqdm import tqdm
-from vis import plot_matplotlib
+from cpfinder.vis import plot_matplotlib
 from cpfinder.feature_engineering import _get_cps_from_R
 
 

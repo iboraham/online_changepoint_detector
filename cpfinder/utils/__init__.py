@@ -12,7 +12,7 @@ def str_to_func(string: str):
     Returns:
         func: method
     """
-    if string == "BOCPD":
+    if string == "bocpd":
         return bocpd
     if string == "rulsif":
         return rulsif

@@ -1,4 +1,3 @@
-from vis import plot_matplotlib
 from matplotlib import pyplot as plt
 from matplotlib.animation import FuncAnimation
 import numpy as np
@@ -19,25 +18,25 @@ class bocpd:
     """
 
     def __init__(self, args):
-        if args == "auto":
+        if args["auto"]:
             self.hazard = 1 / 100
             self.mean0 = 0
             self.var0 = 1
             self.varx = 2
             self.ii = 3
         else:
-            self.hazard = args[0]
-            self.mean0 = args[1]
-            self.var0 = args[2]
-            self.varx = args[3]
-            self.ii = args[4]
+            self.hazard = args["hazard"]
+            self.mean0 = args["mean0"]
+            self.var0 = args["var0"]
+            self.varx = args["varx"]
+            self.ii = args["ii"]
 
-    def fit(self, data, interval=100, animation=True):
+    def fit(self, data, interval, animationFlag):
 
         # Create model
         model = oncd.GaussianUnknownMean(self.mean0, self.var0, self.varx)
 
-        if animation == True:
+        if animationFlag == True:
             # Plot
             animation = oncd.online_changepoint_detection_animation(
                 data, model, self.hazard, interval, self.ii
@@ -49,9 +48,6 @@ class bocpd:
                 data, model, self.hazard, self.ii
             )
             cps = _get_cps_from_R(R, self.ii)
-            # fig, axes = plt.subplots(2, 1, figsize=(20, 10))
-            # plot_matplotlib(axes, data, R, pmean, pvar, cps)
-            # plt.show()
             return cps
 
 
@@ -85,7 +81,7 @@ class rulsif:
         else:
             self.model = roerich.OnlineNNRuLSIF(*args)
 
-    def fit(self, data, interval, plot=True):
+    def fit(self, data, interval, plot=False):
         T = np.arange(len(data))
 
         # Create

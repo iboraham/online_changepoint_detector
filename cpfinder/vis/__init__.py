@@ -1,13 +1,8 @@
 from matplotlib import pyplot as plt
-from .initial_plot_src import plot
 from .plot_mtp import plot_posterior
 import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
-
-
-def initial_plot(*args):
-    plot(*args)
 
 
 def plot_matplotlib(*args):
