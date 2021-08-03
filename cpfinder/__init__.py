@@ -18,10 +18,10 @@ class cpfinder:
         self.method = method
         self.data = data
 
-    def fit(self):
+    def fit(self, animationFlag):
 
         # Given method to function
         method = str_to_func(self.method)
 
         detector = method("auto")
-        return detector.fit(self.data)
+        return detector.fit(self.data, animationFlag)
