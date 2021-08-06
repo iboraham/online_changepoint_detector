@@ -58,7 +58,7 @@ class cpfinder:
         # Given method to function
         method = str_to_func(self.methodString)
 
-        detector = method(model_parameters)
+        detector = method(**model_parameters)
 
         results = detector.fit(
             self.data, interval, animationFlag, plotFlag, annots=self.annotations
