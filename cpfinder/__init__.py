@@ -60,7 +60,9 @@ class cpfinder:
 
         detector = method(model_parameters)
 
-        results = detector.fit(self.data, interval, animationFlag, plotFlag)
+        results = detector.fit(
+            self.data, interval, animationFlag, plotFlag, annots=self.annotations
+        )
         if plotFlag:
             plt.show()
         self.animationVideo = results if animationFlag else None
