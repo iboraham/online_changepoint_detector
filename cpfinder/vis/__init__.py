@@ -1,7 +1,5 @@
 from matplotlib import pyplot as plt
-from .plot_mtp import plot_posterior, plot_posterior_animation
-import plotly.graph_objects as go
-from plotly.subplots import make_subplots
+from .plot_mtp import plot_posterior, plot_posterior_animation, display
 
 
 def plot_matplotlib(*args):
@@ -10,6 +8,10 @@ def plot_matplotlib(*args):
 
 def plot_matplotlib_animation(*args):
     plot_posterior_animation(*args)
+
+
+def roerich_display_edited(*args):
+    display(*args)
 
 
 def plot_result(cpd, cps_p, cps_pf, cps_e):
