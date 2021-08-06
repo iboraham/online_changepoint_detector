@@ -67,7 +67,7 @@ class rulsif:
 
     """
 
-    def __init__(self, args):
+    def __init__(self, **args):
         if args["auto"]:
             self.model = roerich.OnlineNNRuLSIF(
                 net="default",
@@ -84,7 +84,7 @@ class rulsif:
                 alpha=0.1,
             )
         else:
-            self.model = roerich.OnlineNNRuLSIF(*args)
+            self.model = roerich.OnlineNNRuLSIF(**args)
 
     def fit(self, data, interval, animationFlag, plotFlag, annots=[]):
         T = np.arange(len(data))
