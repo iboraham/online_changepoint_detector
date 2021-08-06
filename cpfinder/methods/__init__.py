@@ -1,3 +1,4 @@
+from cpfinder.utils import find_peaks
 from matplotlib import pyplot as plt
 from matplotlib.animation import FuncAnimation
 import numpy as np
@@ -5,7 +6,7 @@ import roerich
 from . import online_changepoint_detection as oncd
 from . import online_rulsif as orul
 from cpfinder.feature_engineering import _get_cps_from_R
-from cpfinder.vis import plot_matplotlib
+from cpfinder.vis import plot_matplotlib, roerich_display_edited
 
 
 class bocpd:
@@ -74,39 +75,53 @@ class rulsif:
                 metric="KL_sym",
                 periods=1,
                 window_size=10,
-                lag_size=500,
+                lag_size=100,
                 step=10,
                 n_epochs=10,
                 lr=0.1,
                 lam=0.0001,
                 optimizer="Adam",
-                alpha=0.001,
+                alpha=0.1,
             )
         else:
             self.model = roerich.OnlineNNRuLSIF(*args)
 
-    def fit(self, data, interval, animationFlag, plotFlag):
+    def fit(self, data, interval, animationFlag, plotFlag, annots=[]):
         T = np.arange(len(data))
 
         # Create
         d = data.flatten()
+
+        if animationFlag:
+            ani = self._animate_rulsif(interval, plotFlag, annots, d)
+            return ani
+        else:
+            peaks = self._not_animate_rulsif(data, plotFlag, annots, T, d)
+            return peaks
+
+    def _not_animate_rulsif(self, data, plotFlag, annots, T, d):
         try:
-            score, peaks = self.model.predict(d)
+            score, _ = self.model.predict(d)
+            peaks = find_peaks(score)
         except ValueError or TypeError:
             peaks = []
-
-        # if animationFlag:
-        #     fig = plt.figure(figsize=(12, 20))
-        #     ani = FuncAnimation(
-        #         fig,
-        #         orul.animate_rulsif,
-        #         np.arange(500, len(data), 500),
-        #         fargs=(data, [], self.model),
-        #     )
-
         if plotFlag == True:
             data = data.reshape(-1, 1)
-            roerich.display(data, T, [], score, T, peaks=peaks)
+            n = data.shape[1] + 1 if peaks is None else data.shape[1] + 2
+            roerich_display_edited(data, n, T, annots, score, T, peaks)
             plt.show()
-
         return peaks
+
+    def _animate_rulsif(self, interval, plotFlag, annots, d):
+        fig = plt.figure(figsize=(12, 6))
+        ani = FuncAnimation(
+            fig,
+            orul.animate_rulsif,
+            np.arange(1, len(d), interval),
+            interval=1,
+            repeat=False,
+            fargs=(d, annots, self.model),
+        )
+        if plotFlag:
+            plt.show()
+        return ani
