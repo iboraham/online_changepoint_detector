@@ -41,11 +41,8 @@ def online_changepoint_detection_animation(data, model, hazard, interval=100, ii
 def _animate_bocpd(i, fig, axes, data, model, hazard, interval=100, ii=1, annots=[]):
     if i == 1:
         d = data[:i]
-        reg = 0
     else:
-        # d = data[i - interval : i]
         d = data[:i]
-        # reg = i - interval
 
     T, log_R, pmean, pvar, log_message, log_H, log_1mH = _create_env(data, hazard, d)
 
@@ -54,7 +51,6 @@ def _animate_bocpd(i, fig, axes, data, model, hazard, interval=100, ii=1, annots
             model, d, log_R, pmean, pvar, log_message, log_H, log_1mH, t
         )
 
-    # cps = _get_cps_from_R(R, insensivity_index=ii)
     plot_matplotlib_animation(
         d, fig, axes, np.arange(0, len(d)), R, pmean, pvar, annots
     )
@@ -111,10 +107,6 @@ def _calc(model, d, log_R, pmean, pvar, log_message, log_H, log_1mH, t):
 
 
 def _create_env(data, hazard, d):
-    pmean_all = np.empty(len(data))
-    pvar_all = np.empty(len(data))
-    R_all = np.exp(-np.inf * np.ones((len(data) + 1, len(data) + 1)))
-
     T = len(d)
     log_R = -np.inf * np.ones((T + 1, T + 1))
     log_R[0, 0] = 0  # log 0 == 1

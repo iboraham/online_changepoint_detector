@@ -1,7 +1,4 @@
-from matplotlib import pyplot as plt
-from matplotlib.animation import FuncAnimation
 import numpy as np
-import roerich
 from cpfinder.vis import roerich_display_edited
 from cpfinder.utils import find_peaks
 
@@ -11,7 +8,6 @@ def animate_rulsif(i, *args):
     X = data[:i]
     X = np.array(X).reshape(-1, 1)
     T = np.arange(len(X))
-    Ts = T
     try:
         score, _ = cpd.predict(X)
         peaks = find_peaks(score)
