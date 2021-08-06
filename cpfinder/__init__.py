@@ -7,7 +7,7 @@ from matplotlib import animation
 
 
 class cpfinder:
-    def __init__(self, data: np.ndarray, annotations=None, method: str = "bocpd"):
+    def __init__(self, data: np.ndarray, annotations=[], method: str = "bocpd"):
         """
         Finds the changepoints with various methods.
 
