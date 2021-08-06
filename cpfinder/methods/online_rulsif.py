@@ -3,6 +3,7 @@ from matplotlib.animation import FuncAnimation
 import numpy as np
 import roerich
 from cpfinder.vis import roerich_display_edited
+from cpfinder.utils import find_peaks
 
 
 def online_changepoint_detector(X):
@@ -50,7 +51,8 @@ def animate_rulsif(i, *args):
     T = np.arange(len(X))
     Ts = T
     try:
-        score, peaks = cpd.predict(X)
+        score, _ = cpd.predict(X)
+        peaks = find_peaks(score)
     except ValueError or TypeError:
         score, peaks = np.zeros(len(X)), None
 
