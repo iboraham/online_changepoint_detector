@@ -8,6 +8,23 @@ from . import online_rulsif as orul
 from cpfinder.feature_engineering import _get_cps_from_R
 from cpfinder.vis import plot_matplotlib, roerich_display_edited
 
+DEFAULT_RULSIF = {
+    "net": "default",
+    "scaler": "default",
+    "metric": "KL_sym",
+    "periods": 1,
+    "window_size": 10,
+    "lag_size": 100,
+    "step": 10,
+    "n_epochs": 10,
+    "lr": 0.1,
+    "lam": 0.0001,
+    "optimizer": "Adam",
+    "alpha": 0.1,
+}
+
+DEFAULT_BOCPD = {"hazard": 1 / 100, "mean0": 0, "var0": 1, "varx": 2, "ii": 3}
+
 
 class bocpd:
     """
@@ -19,7 +36,7 @@ class bocpd:
 
     """
 
-    def __init__(self, args):
+    def __init__(self, **args):
         if args["auto"]:
             self.hazard = 1 / 100
             self.mean0 = 0
@@ -43,8 +60,7 @@ class bocpd:
             animation = oncd.online_changepoint_detection_animation(
                 data, model, self.hazard, interval, self.ii
             )
-            if plotFlag:
-                plt.show()
+            plot_if_flag(plotFlag)
             return animation
         else:
             R, pmean, pvar = oncd.online_changepoint_detection(
@@ -54,6 +70,11 @@ class bocpd:
             if plotFlag:
                 plot_matplotlib(data, np.arange(0, len(data)), R, pmean, pvar, annots)
             return cps
+
+
+def plot_if_flag(self, plotFlag):
+    if plotFlag:
+        plt.show()
 
 
 class rulsif:
@@ -69,20 +90,7 @@ class rulsif:
 
     def __init__(self, **args):
         if args["auto"]:
-            self.model = roerich.OnlineNNRuLSIF(
-                net="default",
-                scaler="default",
-                metric="KL_sym",
-                periods=1,
-                window_size=10,
-                lag_size=100,
-                step=10,
-                n_epochs=10,
-                lr=0.1,
-                lam=0.0001,
-                optimizer="Adam",
-                alpha=0.1,
-            )
+            self.model = roerich.OnlineNNRuLSIF(**DEFAULT_RULSIF)
         else:
             self.model = roerich.OnlineNNRuLSIF(**args)
 
