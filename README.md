@@ -1,6 +1,6 @@
 <h1 align="center">Welcome to CPFinder 👋</h1>
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/version-0.1-blue.svg?cacheSeconds=2592000" />
+  <img alt="Version" src="https://img.shields.io/badge/version-0.22-blue.svg?cacheSeconds=2592000" />
   <a href="https://github.com/iboraham/online_changepoint_detector/tree/master/docs" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
