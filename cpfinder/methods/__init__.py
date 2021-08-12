@@ -72,7 +72,7 @@ class bocpd:
             return cps
 
 
-def plot_if_flag(self, plotFlag):
+def plot_if_flag(plotFlag):
     if plotFlag:
         plt.show()
 
@@ -130,6 +130,5 @@ class rulsif:
             repeat=False,
             fargs=(d, annots, self.model),
         )
-        if plotFlag:
-            plt.show()
+        plot_if_flag(plotFlag)
         return ani
