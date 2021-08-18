@@ -92,6 +92,7 @@ class rulsif:
         if args["auto"]:
             self.model = roerich.OnlineNNRuLSIF(**DEFAULT_RULSIF)
         else:
+            del args['auto']
             self.model = roerich.OnlineNNRuLSIF(**args)
 
     def fit(self, data, interval, animationFlag, plotFlag, annots=[]):
