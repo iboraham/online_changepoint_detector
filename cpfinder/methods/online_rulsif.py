@@ -10,8 +10,6 @@ def animate_rulsif(i, *args):
     data, L, cpd = args
     X = data[:i]
     X = np.array(X).reshape(-1, 1)
-    T = np.arange(len(X))
-    Ts = T
     try:
         score, _ = cpd.predict(X)
         peaks = find_peaks(score)
