@@ -1,5 +1,11 @@
-from distutils.core import setup
-from setuptools import find_packages
+from setuptools import setup
+import pathlib
+
+# The directory containing this file
+HERE = pathlib.Path(__file__).parent
+
+# The text of the README file
+README = (HERE / "README.md").read_text()
 
 setup(
     name="cpfinder",
@@ -12,13 +18,15 @@ setup(
         "cpfinder.utils",
         "cpfinder.vis",
     ],
-    version="0.1.2",
+    version="0.2.1",
     license="MIT",
     description="Online changepoint detection for python",
+    long_description=README,
+    long_description_content_type="text/markdown",
     author="Ibrahim Onur Serbetci",
     author_email="ionurserbetci@gmail.com",
     url="https://github.com/iboraham/online_changepoint_detector",
-    download_url="https://github.com/iboraham/online_changepoint_detector/archive/v_01.tar.gz",
+    download_url="https://github.com/iboraham/online_changepoint_detector/archive/v_02.tar.gz",
     keywords=[
         "online changepoint detection",
         "changepoint detection",

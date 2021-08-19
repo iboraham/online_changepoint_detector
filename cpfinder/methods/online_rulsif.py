@@ -1,7 +1,4 @@
-from matplotlib import pyplot as plt
-from matplotlib.animation import FuncAnimation
 import numpy as np
-import roerich
 from cpfinder.vis import roerich_display_edited
 from cpfinder.utils import find_peaks
 
