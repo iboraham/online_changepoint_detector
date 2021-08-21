@@ -22,8 +22,7 @@ def generate_normal_time_series(
     for partitionSize in partition:
         partitionMean = np.random.randn() * 10
         partitionVar = np.random.randn() * 1
-        if partitionVar < 0:
-            partitionVar = partitionVar * -1 if partitionVar < 0 else partitionVar
+        partitionVar = partitionVar * -1 if partitionVar < 0 else partitionVar
         partitionData = np.random.normal(partitionMean, partitionVar, partitionSize)
         data = np.concatenate((data, partitionData))
     return data
