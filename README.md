@@ -4,6 +4,7 @@
   <a href="https://github.com/iboraham/online_changepoint_detector/tree/master/docs" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
+  <a href="https://pepy.tech/project/cpfinder"><img src="https://pepy.tech/badge/cpfinder" alt="Downloads"></a>
   <img src='https://bettercodehub.com/edge/badge/iboraham/online_changepoint_detector?branch=master'>
   <a href="https://raw.githubusercontent.com/iboraham/online_changepoint_detector/master/LICENSE" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
