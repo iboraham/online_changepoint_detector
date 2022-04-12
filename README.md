@@ -46,7 +46,7 @@ python example.py
 >> from cpfinder.datasets import generate_normal_time_series
 
 # Example data
->> data = generate_normal_time_series(3)
+>> data = generate_normal_time_series(totalPartitions=3)
 
 # Changepoint Detection
 >> detector = cpfinder(data=data, method="bocpd")
