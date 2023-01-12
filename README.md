@@ -22,9 +22,11 @@
 
 > Online changepoint detection for python
 
+
+
 ### 🏠 [Homepage](https://github.com/iboraham/online_changepoint_detector)
 
-### ✨ [Demo](https://github.com/iboraham/online_changepoint_detector/blob/master/assets/preview.gif?raw=true)
+### ✨ [Demo](https://www.canva.com/design/DAElATzOLMs/N-D6v6b3wIN2cixDKhxXNg/view?utm_content=DAElATzOLMs&utm_campaign=designshare&utm_medium=link&utm_source=sharebutton)
 
 ![Demo](https://github.com/iboraham/online_changepoint_detector/blob/master/assets/preview.gif?raw=true)
 
