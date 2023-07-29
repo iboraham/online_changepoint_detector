@@ -5,12 +5,9 @@
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
   <a href="https://pepy.tech/project/cpfinder"><img src="https://pepy.tech/badge/cpfinder" alt="Downloads"></a>
-  <img src='https://bettercodehub.com/edge/badge/iboraham/online_changepoint_detector?branch=master'>
   <a href="https://raw.githubusercontent.com/iboraham/online_changepoint_detector/master/LICENSE" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
   </a>
-  <a href="https://lgtm.com/projects/g/iboraham/online_changepoint_detector/alerts/"><img alt="Total alerts" src="https://img.shields.io/lgtm/alerts/g/iboraham/online_changepoint_detector.svg?logo=lgtm&logoWidth=18"/></a>
-  <a href="https://lgtm.com/projects/g/iboraham/online_changepoint_detector/context:python"><img alt="Language grade: Python" src="https://img.shields.io/lgtm/grade/python/g/iboraham/online_changepoint_detector.svg?logo=lgtm&logoWidth=18"/></a>
   
   <a href="https://colab.research.google.com/github/iboraham/online_changepoint_detector/blob/master/docs/example.ipynb">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
